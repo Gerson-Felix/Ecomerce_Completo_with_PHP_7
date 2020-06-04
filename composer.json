@@ -1,5 +1,5 @@
 {
-    "name": "Gerson-Felix/ecommerce",
+    "name": "gerson-felix/ecommerce",
     "authors": [
         {
             "name": "Gerson Felix"
@@ -12,7 +12,7 @@
     },
     "autoload": {
         "psr-4": {
-            "": "vendor\\auto_load\\php-classes\\src"
+            "All\\": "vendor\\auto_load\\php-classes\\src"
         }
     }
 }
