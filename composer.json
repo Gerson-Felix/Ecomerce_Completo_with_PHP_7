@@ -1,0 +1,18 @@
+{
+    "name": "Gerson-Felix/ecommerce",
+    "authors": [
+        {
+            "name": "Gerson Felix"
+        }
+    ],
+    "require": {
+    	"phpmailer/phpmailer":"~6.1",
+    	"slim/slim":"2.0",
+    	"rain/raintpl":"3.0.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "": "vendor\\auto_load\\php-classes\\src"
+        }
+    }
+}
