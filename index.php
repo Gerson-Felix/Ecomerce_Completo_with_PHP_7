@@ -4,7 +4,9 @@
 
 	use \Slim\Slim;
 
-	use All\Page;
+	use \All\Page;
+
+	use \All\PageAdmin;
 
 	$app = new Slim();
 
@@ -13,6 +15,14 @@
 	$app->get('/', function() {
     
 		$page = new Page();
+
+		$page->setTpl("index");
+
+	});
+
+	$app->get('/admin', function() {
+    
+		$page = new PageAdmin();
 
 		$page->setTpl("index");
 
