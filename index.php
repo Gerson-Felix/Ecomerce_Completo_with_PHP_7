@@ -1,21 +1,23 @@
 <?php 
 
-require_once("vendor/autoload.php");
+	require_once("vendor/autoload.php");
 
-$app = new \Slim\Slim();
+	use \Slim\Slim;
 
-$app->config('debug', true);
+	use All\Page;
 
-$app->get('/', function() {
+	$app = new Slim();
+
+	$app->config('debug', true);
+
+	$app->get('/', function() {
     
-	$sql = new All\DB\Sql();
+		$page = new Page();
 
-	$results = $sql->select("SELECT * FROM tb_users");
+		$page->setTpl("index");
 
-	echo json_encode($results);
+	});
 
-});
+	$app->run();
 
-$app->run();
-
- ?>
+?>
