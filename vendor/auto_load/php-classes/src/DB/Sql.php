@@ -60,6 +60,10 @@ class Sql {
 
 		$stmt->execute();
 
+		// var_dump($stmt, $params);
+
+		// exit();
+
 		return $stmt->fetchAll(\PDO::FETCH_ASSOC);
 
 	}

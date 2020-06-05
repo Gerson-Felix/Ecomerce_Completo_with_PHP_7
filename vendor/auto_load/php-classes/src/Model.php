@@ -11,11 +11,11 @@
 			$fieldName = substr($name, 3, strlen($name));
 
 			switch ($method) {
-				case 'get':
+				case "get":
 					$this->values[$fieldName];
 					break;
 
-				case 'set':
+				case "set":
 					$this->values[$fieldName] = $args[0];
 					break;
 				

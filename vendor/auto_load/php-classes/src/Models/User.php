@@ -55,5 +55,65 @@
 		{
 			$_SESSION[User::SESSION] = NULL;
 		}
+
+		public static function listAll()
+		{
+			$sql = new Sql();
+
+			return $sql->select("SELECT * FROM tb_users a INNER JOIN tb_persons b USING(idperson) ORDER BY b.desperson");
+		}
+
+		public function save()
+		{
+			$sql = new Sql();
+
+			$results = $sql->select("CALL sp_users_save (:desperson, :deslogin, :despassword, :desemail, :nrphone, :inadmin)", [
+				":desperson" => $this->getValues()['desperson'],
+				":deslogin" =>$this->getValues()['deslogin'],
+				":despassword" => $this->getValues()['despassword'],
+				":desemail" => $this->getValues()['desemail'],
+				":nrphone" => $this->getValues()['nrphone'],
+				":inadmin" => $this->getValues()['inadmin']
+			]);
+
+			$this->setData($results[0]);
+		}
+
+		public function get ($iduser)
+		{
+			$sql = new Sql();
+
+			$results = $sql->select("SELECT * FROM tb_users a INNER JOIN tb_persons b USING (idperson) WHERE a.iduser = :iduser", [
+				":iduser"=>$iduser
+			]);
+
+			$this->setData($results[0]);
+		}
+
+		public function update()
+		{
+			$sql = new Sql();
+
+			$results = $sql->select("CALL sp_usersupdate_save (:iduser, :desperson, :deslogin, :despassword, :desemail, :nrphone, :inadmin)", [
+				":iduser"=> $this->getValues()['iduser'],
+				":desperson" => $this->getValues()['desperson'],
+				":deslogin" =>$this->getValues()['deslogin'],
+				":despassword" => $this->getValues()['despassword'],
+				":desemail" => $this->getValues()['desemail'],
+				":nrphone" => $this->getValues()['nrphone'],
+				":inadmin" => $this->getValues()['inadmin']
+			]);
+
+			$this->setData($results[0]);
+		}
+
+		public function delete()
+		{
+			$sql = new Sql();
+
+			$sql->query("CALL sp_users_delete (:iduser)", [
+				":iduser"=>$this->getValues()['iduser']
+			]);
+		}
 	}
 ?>

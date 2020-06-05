@@ -1,7 +1,7 @@
 <?php  
 	namespace All;
 
-	use Rain\Tpl;
+	use \Rain\Tpl;
 
 	//Classe Responsavel pela Renderização do HTML genérico do Sistema
 	class Page
@@ -18,7 +18,7 @@
 		private function setData ($data = [])
 		{
 			foreach ($data as $key => $value) {
-				$this->$tpl->assign($key, $value);
+				$this->tpl->assign($key, $value);
 			}
 		}
 		
@@ -52,7 +52,9 @@
 			//Chamada da Função setData
 			$this->setData($data);
 
-			return $this->tpl->draw($name, $returnHTML);
+			var_dump($this->tpl->draw($name, $returnHTML));
+
+			exit();
 		}
 
 		// Destrutor Responsavel pelo Footer (Rodapé) das Páginas HTML
