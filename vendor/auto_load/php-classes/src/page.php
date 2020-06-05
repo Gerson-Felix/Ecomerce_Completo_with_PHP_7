@@ -9,6 +9,8 @@
 		private $tpl;
 		private $options = [];
 		private $defaults = [
+			"header"=>true,
+			"footer"=>true,
 			"data" => []
 		];
 
@@ -39,7 +41,7 @@
 			//Chamada da Função setData
 			$this->setData($this->options["data"]);
 
-			$this->tpl->draw("header");
+			if ($this->options["header"] === true) $this->tpl->draw("header");
 
 		}
 
@@ -56,7 +58,7 @@
 		// Destrutor Responsavel pelo Footer (Rodapé) das Páginas HTML
 		public function __destruct ()
 		{
-			$this->tpl->draw("footer");
+			if ($this->options["footer"] === true) $this->tpl->draw("footer");
 		}
 	}
 ?>
