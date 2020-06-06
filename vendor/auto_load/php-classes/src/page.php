@@ -29,7 +29,7 @@
 
 			$config = array(
 				"tpl_dir"       => $_SERVER["DOCUMENT_ROOT"].$tpl_dir,
-				"cache_dir"     => $_SERVER["DOCUMENT_ROOT"]."/views-cache",
+				"cache_dir"     => $_SERVER["DOCUMENT_ROOT"]."/views-cache/",
 				"debug"         => false
 			);
 
