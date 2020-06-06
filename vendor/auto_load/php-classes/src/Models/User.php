@@ -75,12 +75,12 @@
 			$sql = new Sql();
 
 			$results = $sql->select("CALL sp_users_save (:desperson, :deslogin, :despassword, :desemail, :nrphone, :inadmin)", [
-				":desperson" => $this->getValues()['desperson'],
-				":deslogin" =>$this->getValues()['deslogin'],
-				":despassword" => $this->getValues()['despassword'],
-				":desemail" => $this->getValues()['desemail'],
-				":nrphone" => $this->getValues()['nrphone'],
-				":inadmin" => $this->getValues()['inadmin']
+				":desperson" => $this->getdesperson(),
+				":deslogin" =>$this->getdeslogin(),
+				":despassword" => $this->getdespassword(),
+				":desemail" => $this->getdesemail(),
+				":nrphone" => $this->getnrphone(),
+				":inadmin" => $this->getinadmin()
 			]);
 
 			$this->setData($results[0]);
@@ -102,13 +102,13 @@
 			$sql = new Sql();
 
 			$results = $sql->select("CALL sp_usersupdate_save (:iduser, :desperson, :deslogin, :despassword, :desemail, :nrphone, :inadmin)", [
-				":iduser"=> $this->getValues()['iduser'],
-				":desperson" => $this->getValues()['desperson'],
-				":deslogin" =>$this->getValues()['deslogin'],
-				":despassword" => $this->getValues()['despassword'],
-				":desemail" => $this->getValues()['desemail'],
-				":nrphone" => $this->getValues()['nrphone'],
-				":inadmin" => $this->getValues()['inadmin']
+				":iduser"=> $this->getiduser(),
+				":desperson" => $this->getdesperson(),
+				":deslogin" =>$this->getdeslogin(),
+				":despassword" => $this->getdespassword(),
+				":desemail" => $this->getdesemail(),
+				":nrphone" => $this->getnrphone(),
+				":inadmin" => $this->getinadmin()
 			]);
 
 			$this->setData($results[0]);
