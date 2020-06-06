@@ -2,11 +2,18 @@
 	namespace All\Models;
 
 	use \All\Model;
+	use \All\Mailer;
 	use \All\DB\Sql;
 	
 	class User extends Model
 	{
 		const SESSION = "user";
+		const SECRET = "GCT_Ecommerce_Se";
+		const SECRET_IV = "GCT_Ecommerce_IV";
+		const ERROR = "UserError";
+		const ERROR_REGISTER = "UserErrorRegister";
+		const SUCESS = "UserSucess";
+
 
 		public static function login ($login, $password)
 		{
@@ -53,7 +60,7 @@
 
 		public static function logout($inadmin = true)
 		{
-			$_SESSION[User::SESSION] = NULL;
+			$_SESSION[User::SESSION] = null;
 		}
 
 		public static function listAll()
@@ -112,6 +119,95 @@
 			$sql = new Sql();
 
 			$sql->query("CALL sp_users_delete (:iduser)", [
+				":iduser"=>$this->getValues()['iduser']
+			]);
+		}
+
+		public static function getForgot($email)
+		{
+			$sql = new Sql();
+
+			$results = $sql->select("SELECT * FROM tb_persons a INNER JOIN tb_users b USING(idperson) WHERE a.desemail = :desemail", [
+				":desemail"=>$email
+			]);
+
+			if (count($results) == 0)
+			{
+				throw new \Exception("Não foi possível recupera a senha");
+			}
+			else
+			{
+				$data = $results[0];
+
+				$resultsRecover = $sql->select("CALL sp_userspasswordsrecoveries_create (:iduser, :desip)", [
+					":iduser"=>$data['iduser'],
+					":desip"=>$_SERVER["REMOTE_ADDR"]
+				]);
+
+				if (count($resultsRecover) === 0)
+				{
+					throw new Exception("Error Processing Request", 1);
+				}
+				else
+				{
+					$dataRecover = $resultsRecover[0];
+
+					$code = base64_encode(openssl_encrypt($dataRecover['idrecovery'], 'AES-128-CBC', pack("a16", User::SECRET), 0, pack("a16", User::SECRET_IV)));
+
+					$link = "http://gct-dev.ao/admin/forgot/reset?code=$code";
+
+					$mailer = new Mailer($data['desemail'], $data['desperson'], "Redefinir Senha do E-Commerce", "forgot", [
+						"name"=>$data['desperson'],
+						"link"=>$link
+					]);
+
+					$mailer->send();
+
+					return $data;
+				}
+			}
+		}
+
+		public static function validForgotDecrypt($code)
+		{
+			$code = base64_decode($code);
+
+			$idrecovery = openssl_decrypt($code, 'AES-128-CBC', pack("a16", User::SECRET), 0, pack("a16", User::SECRET_IV));
+
+
+
+			$sql = new Sql();
+
+			$results = $sql->select("SELECT * FROM tb_userspasswordsrecoveries a INNER JOIN tb_users b using(iduser) INNER JOIN tb_persons c using(idperson) WHERE a.idrecovery = :idrecovery AND a.dtrecovery IS NULL AND DATE_ADD(a.dtregister, INTERVAL 1 HOUR) >= NOW();", [
+				":idrecovery"=>$idrecovery
+			]);
+
+			if (count($results) === 0)
+			{
+				throw new \Exception("Não foi possível recuperar a senha");
+				
+			}
+			else
+			{
+				return $results[0];
+			}
+		}
+
+		public static function setForgotUsed($idrecovery)
+		{
+			$sql = new Sql();
+
+			$sql->query("UPDATE tb_userspasswordsrecoveries SET dtrecovery = NOW() WHERE idrecovery = :idrecovery", [
+				":idrecovery"=>$idrecovery
+			]);
+		}
+
+		public function setPassword($password)
+		{
+			$sql = new Sql();
+
+			$sql->query("UPDATE tb_users SET despassword = :pass WHERE iduser = :iduser", [
+				":pass"=>$password,
 				":iduser"=>$this->getValues()['iduser']
 			]);
 		}

@@ -52,7 +52,7 @@
 			//Chamada da Função setData
 			$this->setData($data);
 
-			var_dump($this->tpl->draw($name, $returnHTML));
+			$this->tpl->draw($name, $returnHTML);
 
 			exit();
 		}
