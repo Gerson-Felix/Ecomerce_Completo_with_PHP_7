@@ -26,7 +26,7 @@
 <!-- Automatic element centering -->
 <div class="lockscreen-wrapper">
   <div class="lockscreen-logo">
-    <a href="/res/admin/index2.html"><b>Admin</b>LTE</a>
+    <a href="/admin/login"><b>Painel Administrativo</b></a>
   </div>
 
   <!-- /.lockscreen-item -->
@@ -38,8 +38,8 @@
     </div>
   </div>
   <div class="lockscreen-footer text-center">
-    Copyright &copy; 2014-2016 <b><a href="http://almsaeedstudio.com" class="text-black">Almsaeed Studio</a></b><br>
-    All rights reserved
+    Copyright &copy; 2020 <br>
+    E-Commerce
   </div>
 </div>
 <!-- /.center -->
