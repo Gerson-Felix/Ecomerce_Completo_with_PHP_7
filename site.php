@@ -3,6 +3,7 @@
 	use \All\Page;
 	use \All\Models\Product;
 	use \All\Models\Category;
+	use \All\Models\Cart;
 
 	$app->get('/', function() {
     	
@@ -57,5 +58,15 @@
 			'product'=>$product->getValues(),
 			'categories'=>$product->getCategories()
 		]);
+	});
+
+	$app->get('/cart', function(){
+
+		$cart = Cart::getFromSession();
+
+		$page = new Page();
+
+		$page->setTpl("cart");
+
 	});
 ?>
