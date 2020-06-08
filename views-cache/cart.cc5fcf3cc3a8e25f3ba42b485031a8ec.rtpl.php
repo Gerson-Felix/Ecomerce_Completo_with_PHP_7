@@ -21,9 +21,9 @@
 
                         <form action="/checkout">
                             
-                            <div class="alert alert-danger" role="alert">
+                            <!-- <div class="alert alert-danger" role="alert">
                             Error!
-                            </div>
+                            </div> -->
 
                             <table cellspacing="0" class="shop_table cart">
                                 <thead>
@@ -75,37 +75,15 @@
 
                             <div class="cart-collaterals">
 
-                                <div class="cross-sells">
-
-                                    <h2>Cálculo de Frete</h2>
-                                    
-                                    <div class="coupon">
-                                        <label for="cep">CEP:</label>
-                                        <input type="text" placeholder="00000-000" value="" id="cep" class="input-text" name="zipcode">
-                                        <input type="submit" formmethod="post" formaction="/cart/freight" value="CÁLCULAR" class="button">
-                                    </div>
-
-                                </div>
-
                                 <div class="cart_totals ">
 
                                     <h2>Resumo da Compra</h2>
 
                                     <table cellspacing="0">
                                         <tbody>
-                                            <tr class="cart-subtotal">
-                                                <th>Subtotal</th>
-                                                <td><span class="amount">$700.00</span></td>
-                                            </tr>
-
-                                            <tr class="shipping">
-                                                <th>Frete</th>
-                                                <td>$5.00 <small>prazo de 0 dia(s)</small></td>
-                                            </tr>
-
                                             <tr class="order-total">
                                                 <th>Total</th>
-                                                <td><strong><span class="amount">$705.00</span></strong> </td>
+                                                <td><strong><span class="amount">Akz <?php echo formatPrice($cart["vltotal"]); ?></span></strong> </td>
                                             </tr>
                                         </tbody>
                                     </table>

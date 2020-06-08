@@ -55,7 +55,7 @@
 		{
 			$sql = new Sql();
 
-			$results = $sql->select("SELECT * FROM tb_users WHERE deslogin = :LOGIN", [
+			$results = $sql->select("SELECT * FROM tb_users a INNER JOIN tb_persons b ON a.idperson = b.idperson WHERE deslogin = :LOGIN", [
 				":LOGIN" => $login
 			]);
 
@@ -84,9 +84,15 @@
 
 		public static function verifyLogin($inadmin = true)
 		{
-			if (User::checkLogin($inadmin))
+			if (!User::checkLogin($inadmin))
 			{
-				header("Location: /admin/login");
+				if ($inadmin) {
+					header("Location: /admin/login");
+				}
+				else
+				{
+					header("Location: /login");
+				}
 				exit();
 			}
 		}
@@ -110,7 +116,7 @@
 			$results = $sql->select("CALL sp_users_save (:desperson, :deslogin, :despassword, :desemail, :nrphone, :inadmin)", [
 				":desperson" => $this->getdesperson(),
 				":deslogin" =>$this->getdeslogin(),
-				":despassword" => $this->getdespassword(),
+				":despassword" => User::getPasswordHash($this->getdespassword()),
 				":desemail" => $this->getdesemail(),
 				":nrphone" => $this->getnrphone(),
 				":inadmin" => $this->getinadmin()
@@ -138,7 +144,7 @@
 				":iduser"=> $this->getiduser(),
 				":desperson" => $this->getdesperson(),
 				":deslogin" =>$this->getdeslogin(),
-				":despassword" => $this->getdespassword(),
+				":despassword" => User::getPasswordHash($this->getdespassword()),
 				":desemail" => $this->getdesemail(),
 				":nrphone" => $this->getnrphone(),
 				":inadmin" => $this->getinadmin()
@@ -243,6 +249,35 @@
 				":pass"=>$password,
 				":iduser"=>$this->getValues()['iduser']
 			]);
+		}
+
+		public static function setError($msg)
+		{
+			$_SESSION[User::ERROR] = $msg;
+		}
+
+		public static function getError()
+		{
+			$msg = (isset($_SESSION[User::ERROR]) && $_SESSION[User::ERROR]) ? $_SESSION[User::ERROR] : '';
+
+			User::clearError();
+
+			return $msg;
+		}
+
+		public static function clearError()
+		{
+			$_SESSION[User::ERROR] = NULL;
+		}
+
+		public static function setErrorRegister($msg)
+		{
+			$_SESSION[User::ERROR_REGISTER] = $msg;
+		}
+
+		public static function getPasswordHash ($password)
+		{
+			return password_hash($password, PASSWORD_DEFAULT, ['cost'=>12]);
 		}
 	}
 ?>
