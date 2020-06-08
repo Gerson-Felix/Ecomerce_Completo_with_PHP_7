@@ -83,7 +83,7 @@
                                         <tbody>
                                             <tr class="order-total">
                                                 <th>Total</th>
-                                                <td><strong><span class="amount">Akz <?php echo formatPrice($cart["vltotal"]); ?></span></strong> </td>
+                                                <td><strong><span class="amount">Akz <?php if( $cart["vltotal"] != '' ){ ?><?php echo formatPrice($cart["vltotal"]); ?><?php }else{ ?>0.0<?php } ?> </span></strong> </td>
                                             </tr>
                                         </tbody>
                                     </table>

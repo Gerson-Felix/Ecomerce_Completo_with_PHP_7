@@ -124,17 +124,6 @@
 		exit();
 	});
 
-	$app->post('/cart/freight', function() {
-
-		$cart = Cart::getFromSession();
-
-		$cart->setFreight($_POST['zipcode']);
-
-		header('Location: /cart');
-
-		exit();
-	});
-
 	$app->get('/checkout', function () {
 
 		User::verifyLogin(false);
@@ -147,8 +136,17 @@
 
 		$page->setTpl("checkout", [
 			'cart'=>$cart->getValues(),
-			'address'=>$address->getValues()
+			'products'=>$cart->getProducts()
 		]);
+	});
+
+	$app->post('/checkout', function (){
+
+		User::verifyLogin(false);
+
+		header("Location: /order");
+
+		exit();
 	});
 
 	$app->get('/login', function () {
