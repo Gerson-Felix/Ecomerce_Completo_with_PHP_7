@@ -307,5 +307,24 @@
 
 			return (count($results) > 0);
 		}
+
+		public static function setSucess($msg)
+		{
+			$_SESSION[User::SUCESS] = $msg;
+		}
+
+		public static function getSucess()
+		{
+			$msg = (isset($_SESSION[User::SUCESS]) && $_SESSION[User::SUCESS]) ? $_SESSION[User::SUCESS] : '';
+
+			User::clearError();
+
+			return $msg;
+		}
+
+		public static function clearSucess()
+		{
+			$_SESSION[User::SUCESS] = NULL;
+		}
 	}
 ?>
