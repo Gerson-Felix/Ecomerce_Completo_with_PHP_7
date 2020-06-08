@@ -162,7 +162,7 @@
 			]);
 		}
 
-		public static function getForgot($email)
+		public static function getForgot($email, $inadmin = true)
 		{
 			$sql = new Sql();
 
@@ -193,7 +193,15 @@
 
 					$code = base64_encode(openssl_encrypt($dataRecover['idrecovery'], 'AES-128-CBC', pack("a16", User::SECRET), 0, pack("a16", User::SECRET_IV)));
 
-					$link = "http://gct-dev.ao/admin/forgot/reset?code=$code";
+					if ($inadmin === true)
+					{
+						$link = "http://gct-dev.ao/admin/forgot/reset?code=$code";
+					}
+					else
+					{
+						$link = "http://gct-dev.ao/forgot/reset?code=$code";
+					}
+					
 
 					$mailer = new Mailer($data['desemail'], $data['desperson'], "Redefinir Senha do E-Commerce", "forgot", [
 						"name"=>$data['desperson'],
