@@ -95,7 +95,7 @@
 								':idcategory'=>$this->getidcategory()
 							]);
 
-			$resultsTotal = $sql->select("SELECT found_rows() AS nrtotal");
+			$resultsTotal = $sql->select("SELECT FOUND_ROWS() AS nrtotal");
 
 			return [
 				'data'=>Product::checkList($results),
