@@ -5,7 +5,6 @@
                 <div class="col-md-3 col-sm-6">
                     <div class="footer-about-us">
                         <h2>E-Commerce</h2>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perferendis sunt id doloribus vero quam laborum quas alias dolores blanditiis iusto consequatur, modi aliquid eveniet eligendi iure eaque ipsam iste, pariatur omnis sint! Suscipit, debitis, quisquam. Laborum commodi veritatis magni at?</p>
                         <div class="footer-social">
                             <a href="#" target="_blank"><i class="fa fa-facebook"></i></a>
                             <a href="#" target="_blank"><i class="fa fa-twitter"></i></a>
@@ -19,8 +18,7 @@
                         <h2 class="footer-wid-title">Navegação </h2>
                         <ul>
                             <li><a href="/profile">Minha Conta</a></li>
-                            <li><a href="#">Meus Pedidos</a></li>
-                            <li><a href="#">Lista de Desejos</a></li>
+                            <li><a href="/profile">Meus Pedidos</a></li>
                         </ul>                        
                     </div>
                 </div>
@@ -35,18 +33,6 @@
                     </div>
                 </div>
                 
-                <div class="col-md-3 col-sm-6">
-                    <div class="footer-newsletter">
-                        <h2 class="footer-wid-title">Newsletter</h2>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perferendis sunt id doloribus!</p>
-                        <div class="newsletter-form">
-                            <form action="#">
-                                <input type="email" placeholder="Type your email">
-                                <input type="submit" value="Subscribe">
-                            </form>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     </div> <!-- End footer top area -->
@@ -57,15 +43,6 @@
                 <div class="col-md-8">
                     <div class="copyright">
                         <p>&copy; 2020 E-Commerce. </p>
-                    </div>
-                </div>
-                
-                <div class="col-md-4">
-                    <div class="footer-card-icon">
-                        <i class="fa fa-cc-discover"></i>
-                        <i class="fa fa-cc-mastercard"></i>
-                        <i class="fa fa-cc-paypal"></i>
-                        <i class="fa fa-cc-visa"></i>
                     </div>
                 </div>
             </div>

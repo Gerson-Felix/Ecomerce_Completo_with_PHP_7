@@ -41,4 +41,11 @@
 
 		return ($totals['vlprice'] != '') ? formatPrice($totals['vlprice']) : 0.0;
 	}
+
+	function getNomeAdmin()
+	{
+		$user = User::getFromSession();
+
+		return $user->getdeslogin();
+	}
 ?>
