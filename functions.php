@@ -7,6 +7,11 @@
 		return number_format($vlprice, 2, ",", ".");
 	}
 
+	function formatDate($date)
+	{
+		return date('d/m/Y', strtotime($date));
+	}
+
 	function checkLogin($inadmin = true)
 	{
 		return User::checkLogin($inadmin);
@@ -34,6 +39,6 @@
 
 		$totals = $cart->getProductsTotals();
 
-		return formatPrice($totals['vlprice']);
+		return ($totals['vlprice'] != '') ? formatPrice($totals['vlprice']) : 0.0;
 	}
 ?>
